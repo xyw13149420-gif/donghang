@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<!-- 纯静态、无外部请求：默认全禁，只放行同目录的脚本与样式。
+     页面里有大量内联 style 属性（条形宽度），所以样式仍需 'unsafe-inline'；
+     脚本里已不再使用 eval / new Function，所以 script-src 保持干净。 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' 'unsafe-inline' file:; img-src 'self' data: file:; font-src 'self' file:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>懂行 · 电商人的随身助手</title>
+<!-- 内联 SVG 图标：不额外请求文件，也免得浏览器去要 favicon.ico 拿到 404 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F4E5F'/%3E%3Cg fill='%23fff'%3E%3Crect x='7' y='9' width='18' height='2.4' rx='1.2'/%3E%3Crect x='7' y='15' width='13' height='2.4' rx='1.2'/%3E%3Crect x='7' y='21' width='8' height='2.4' rx='1.2'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="description" content="把 GMV 拆成七个乘数，53 条指标公式可算，104 个术语可查，广告法违规词可检，单品利润可试。可以导入自己的后台报表，数据只留在本机。纯静态，双击即用。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="glow" aria-hidden="true"></div>
+<!-- 滚过大标题后出现的固定顶条，常驻到回到页头为止。
+     脱离文档流，靠 transform 上下移动，
+     所以它的出现与收起不会改变任何布局高度，也就不会把滚动位置顶回去 -->
+<div id="topbar" aria-hidden="true"><div class="tb-in"><span class="tb-eb"></span><span class="tb-t"></span></div></div>
+<div class="app">
+  <aside class="side">
+    <div class="brand">懂行<small>电商人的随身助手</small></div>
+
+    <div class="grp">看懂</div>
+    <div class="nav on" data-view="tree" tabindex="0" role="button"><span class="nm">拆解</span><span class="ns">GMV 怎么来的</span></div>
+    <div class="nav" data-view="formula" tabindex="0" role="button"><span class="nm">算账</span><span class="ns">53 个指标怎么算</span></div>
+    <div class="nav" data-view="glossary" tabindex="0" role="button"><span class="nm">认词</span><span class="ns">104 个词什么意思</span></div>
+
+    <div class="grp">动手</div>
+    <div class="nav" data-view="guard" tabindex="0" role="button"><span class="nm">避坑</span><span class="ns">标题有没有违规词</span></div>
+    <div class="nav" data-view="price" tabindex="0" role="button"><span class="nm">试价</span><span class="ns">这单到底赚不赚</span></div>
+
+    <div class="grp">你的数据</div>
+    <div class="nav" data-view="data" tabindex="0" role="button"><span class="nm">我的数</span><span class="ns">换成你的真实报表</span></div>
+
+    <div class="grp">这本小册</div>
+    <div class="nav" data-view="about" tabindex="0" role="button"><span class="nm">关于</span><span class="ns">为什么这么设计</span></div>
+
+    <div class="side-foot">示例数据 · 非真实经营<br>换数据只改 data.js</div>
+  </aside>
+
+  <main class="main" id="main"></main>
+</div>
+
+<script src="data.js"></script>
+<script src="import.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
